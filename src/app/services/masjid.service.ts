@@ -9,11 +9,24 @@ import {Observable} from 'rxjs';
 })
 export class MasjidService {
 
-  masjidsUrl = 'http://localhost:8000/api/masjids';
+  masjidsUrl = 'http://localhost:8000/api/masjids/date/{date}';
 
   constructor(private http: HttpClient) { }
 
   getMasjids(): Observable<Masjid[]> {
+    this.masjidsUrl = 'http://localhost:8000/api/masjids/date/' + this.getCurrentDate();
     return this.http.get<Masjid[]>(this.masjidsUrl);
+  }
+
+  getCurrentDate(): string {
+    const date: Date = new Date();
+    const year: string = String(date.getFullYear());
+    const month: string = String(Number(date.getMonth()) + 1).padStart(2, '0');
+    const day: string = String(date.getDate()).padStart(2, '0');
+
+    const currentDate: string = year + '-' + month + '-' + day;
+
+    console.log(currentDate);
+    return currentDate;
   }
 }
