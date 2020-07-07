@@ -14,8 +14,12 @@ export class MasjidService {
   constructor(private http: HttpClient) { }
 
   getMasjids(): Observable<Masjid[]> {
-    this.masjidsUrl = 'http://localhost:8000/api/masjids/date/' + this.getCurrentDate();
+    this.masjidsUrl = this.getMasjidsByCurrentDateUrlBuilder(this.getCurrentDate());
     return this.http.get<Masjid[]>(this.masjidsUrl);
+  }
+
+  getMasjidsByCurrentDateUrlBuilder(date: string): string {
+    return 'http://localhost:8000/api/masjids/date/' + date;
   }
 
   getCurrentDate(): string {

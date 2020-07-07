@@ -1,1 +1,2 @@
-<app-masjid *ngFor="let masjid of masjids" [masjid]="masjid"></app-masjid>
+<input type="text" [(ngModel)]="search" (keyup)="updateMasjids()"/>
+<app-masjid *ngFor="let masjid of filteredMasjids" [masjid]="masjid"></app-masjid>

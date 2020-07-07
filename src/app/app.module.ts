@@ -7,6 +7,10 @@ import { MasjidsComponent } from './components/masjids/masjids.component';
 import { MasjidComponent } from './components/masjid/masjid.component';
 import { TimingComponent } from './components/timing/timing.component';
 import { TimingsComponent } from './components/timings/timings.component';
+import {FormsModule} from '@angular/forms';
+import { SearchMasjidComponent } from './components/search-masjid/search-masjid.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -14,11 +18,14 @@ import { TimingsComponent } from './components/timings/timings.component';
     MasjidsComponent,
     MasjidComponent,
     TimingComponent,
-    TimingsComponent
+    TimingsComponent,
+    SearchMasjidComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

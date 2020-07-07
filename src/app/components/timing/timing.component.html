@@ -1,3 +1,3 @@
-<div>
-  <p>{{ timing.prayer }} - {{ timing.time }}</p>
+<div class="timing" [ngClass]="timingClasses">
+  <span class="timing-prayer">{{ timing.prayer | lowercase }} </span><span class="timing-time">{{ timing.time }}</span>
 </div>
