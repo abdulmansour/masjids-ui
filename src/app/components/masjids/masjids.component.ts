@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Masjid } from '../../models/Masjid';
 import { MasjidService } from '../../services/masjid.service';
-import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-masjids',
@@ -9,10 +8,11 @@ import {delay} from 'rxjs/operators';
   styleUrls: ['./masjids.component.css']
 })
 export class MasjidsComponent implements OnInit {
-
   filteredMasjids: Masjid[];
   masjids: Masjid[];
   search: string;
+
+  @Output() subscribeEvent = new EventEmitter();
 
   constructor(private masjidService: MasjidService) { }
 
@@ -20,7 +20,7 @@ export class MasjidsComponent implements OnInit {
     this.masjidService.getMasjids().subscribe(masjids => {
       this.masjids = masjids;
       this.filteredMasjids = masjids;
-      console.log(this.masjids);
+      // console.log(this.masjids);
     });
   }
 
@@ -35,4 +35,8 @@ export class MasjidsComponent implements OnInit {
     }, this);
   }
 
+  subscribeMasjid(subscribedMasjid: Masjid): void {
+    // console.log(subscribedMasjid);
+    this.subscribeEvent.emit(subscribedMasjid);
+  }
 }

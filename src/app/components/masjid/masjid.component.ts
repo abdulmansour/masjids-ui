@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {Masjid} from '../../models/Masjid';
 import {Timing} from '../../models/Timing';
 
@@ -9,10 +9,14 @@ import {Timing} from '../../models/Timing';
 })
 export class MasjidComponent implements OnInit {
   @Input() masjid: Masjid;
-
+  @Output() subscribeEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  subscribe(): void {
+    this.subscribeEvent.emit(this.masjid);
   }
 
 }

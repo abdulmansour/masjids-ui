@@ -1,5 +1,6 @@
 <div class="masjid-header">
   <h2 class="masjid-name">{{ masjid.name }}</h2>
   <h5 class="masjid-address">{{ masjid.address }}</h5>
+  <button (click)="subscribe()">Subscribe</button>
 </div>
 <app-timings [timings] = masjid.timings></app-timings>

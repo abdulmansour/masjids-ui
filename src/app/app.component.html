@@ -1,3 +1,10 @@
 <app-navbar></app-navbar>
-<app-masjids></app-masjids>
-
+<app-masjids (subscribeEvent)="appendToSubscribedMasjids($event)"></app-masjids>
+<div>
+  <h3>Subscriptions</h3>
+  <ul>
+    <li *ngFor="let masjid of subscribedMasjids">
+      {{ masjid.name }}
+    </li>
+  </ul>
+</div>

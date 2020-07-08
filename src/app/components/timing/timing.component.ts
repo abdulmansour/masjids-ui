@@ -21,12 +21,7 @@ export class TimingComponent implements OnInit {
   }
 
   setIsTimingDark(): void {
-    if (this.timing.prayer === Prayer.Maghrib || this.timing.prayer === Prayer.Isha || this.timing.prayer === Prayer.Fajr) {
-      this.isDark = true;
-    }
-    else {
-      this.isDark = false;
-    }
+    this.isDark = this.timing.prayer === Prayer.Fajr;
     this.timingClasses = {
       'timing-day': !this.isDark,
       'timing-dark': this.isDark
