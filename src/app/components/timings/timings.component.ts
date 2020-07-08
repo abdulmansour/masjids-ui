@@ -9,6 +9,7 @@ import {Timing} from '../../models/Timing';
 export class TimingsComponent implements OnInit {
 
   @Input() timings: Timing[];
+  @Input() zoneId: string;
   constructor() { }
 
   ngOnInit(): void {

@@ -22,7 +22,7 @@ export class MasjidService {
     return 'http://localhost:8000/api/masjids/date/' + date;
   }
 
-  getCurrentDate(): string {
+  public getCurrentDate(): string {
     const date: Date = new Date();
     const year: string = String(date.getFullYear());
     const month: string = String(Number(date.getMonth()) + 1).padStart(2, '0');
@@ -30,7 +30,7 @@ export class MasjidService {
 
     const currentDate: string = year + '-' + month + '-' + day;
 
-    console.log(currentDate);
+    // console.log(currentDate);
     return currentDate;
   }
 }

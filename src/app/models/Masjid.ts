@@ -1,11 +1,10 @@
 import { Timing } from './Timing';
-import {ZoneId} from 'js-joda';
 
 export class Masjid {
   id: number;
   name: string;
   address: string;
-  zoneId: ZoneId;
+  zoneId: string;
   utcOffset: string;
   timings: Timing[];
 }
