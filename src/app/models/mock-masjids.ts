@@ -1,6 +1,6 @@
 import { Masjid } from './Masjid';
 import { Prayer } from './Prayer';
-
+/*
 export const MASJIDS: Masjid[] = [
   {
     id: 1,
@@ -125,3 +125,4 @@ export const MASJIDS: Masjid[] = [
     ]
   }
 ];
+*/

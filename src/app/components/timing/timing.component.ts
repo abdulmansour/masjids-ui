@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Timing} from '../../models/Timing';
 import {Prayer} from '../../models/Prayer';
+import {LocalTime} from 'js-joda';
 
 @Component({
   selector: 'app-timing',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MASJIDS} from '../models/mock-masjids';
+// import { MASJIDS} from '../models/mock-masjids';
 import {Masjid} from '../models/Masjid';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
