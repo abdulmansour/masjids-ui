@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Masjid } from '../../models/Masjid';
 import { MasjidService } from '../../services/masjid.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-masjids',
@@ -8,18 +9,18 @@ import { MasjidService } from '../../services/masjid.service';
   styleUrls: ['./masjids.component.css']
 })
 export class MasjidsComponent implements OnInit {
-  filteredMasjids: Masjid[];
-  masjids: Masjid[];
+  masjids: Masjid[] = [];
+  filteredMasjids: Masjid[] = [];
+  sortedMasjids: Masjid[] = [];
+
   search: string;
 
-  @Output() subscribeEvent = new EventEmitter();
-
-  constructor(private masjidService: MasjidService) { }
+  constructor(private masjidService: MasjidService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.masjidService.getMasjids().subscribe(masjids => {
       this.masjids = masjids;
-      this.filteredMasjids = masjids;
+      this.filteredMasjids = this.sortMasjids(this.masjids);
       // console.log(this.masjids);
     });
   }
@@ -33,10 +34,32 @@ export class MasjidsComponent implements OnInit {
         this.filteredMasjids.push(masjid);
       }
     }, this);
+    this.filteredMasjids = this.sortMasjids(this.filteredMasjids);
   }
 
-  subscribeMasjid(subscribedMasjid: Masjid): void {
-    // console.log(subscribedMasjid);
-    this.subscribeEvent.emit(subscribedMasjid);
+  sortMasjids(arrMasjids: Masjid[]): Masjid[] {
+    this.sortedMasjids = [];
+    const cookies: { [p: string]: string } = this.cookieService.getAll();
+    const subscriptions: number[] = [];
+    const tempMasjids = Object.assign([], arrMasjids);
+
+    for (const [key, value] of Object.entries(cookies)) {
+      if (key.includes('masjid-subscription')) {
+        subscriptions.push(Number(value));
+      }
+    }
+
+    subscriptions.forEach((id: number) => {
+      for (let i = tempMasjids.length - 1; i >= 0; i--) {
+        if (tempMasjids[i].id === id) {
+          this.sortedMasjids.push(tempMasjids[i]);
+          tempMasjids.splice(i, 1);
+        }
+      }
+    }, this);
+
+    // console.log(this.sortedMasjids);
+    this.sortedMasjids = this.sortedMasjids.concat(tempMasjids);
+    return this.sortedMasjids;
   }
 }

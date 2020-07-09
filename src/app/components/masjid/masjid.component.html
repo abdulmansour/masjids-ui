@@ -1,6 +1,11 @@
 <div class="masjid-header">
   <h2 class="masjid-name">{{ masjid.name }}</h2>
   <h5 class="masjid-address">{{ masjid.address }}</h5>
-  <button (click)="subscribe()">Subscribe</button>
+  <div *ngIf="masjid.subscribed; else elseBlock">
+    <button (click)="unsubscribe()">Unsubscribe</button>
+  </div>
+  <ng-template #elseBlock>
+    <button (click)="subscribe()">Subscribe</button>
+  </ng-template>
 </div>
 <app-timings [timings] = masjid.timings [zoneId] = masjid.zoneId></app-timings>

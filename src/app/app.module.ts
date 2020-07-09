@@ -10,6 +10,7 @@ import { TimingsComponent } from './components/timings/timings.component';
 import {FormsModule} from '@angular/forms';
 import { SearchMasjidComponent } from './components/search-masjid/search-masjid.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import {CookieService} from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
