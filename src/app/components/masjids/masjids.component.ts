@@ -11,16 +11,16 @@ import {CookieService} from 'ngx-cookie-service';
 export class MasjidsComponent implements OnInit {
   masjids: Masjid[] = [];
   filteredMasjids: Masjid[] = [];
-  sortedMasjids: Masjid[] = [];
-
   search: string;
 
   constructor(private masjidService: MasjidService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    this.masjidService.getMasjids().subscribe(masjids => {
+    this.masjidService.getMasjids().subscribe((masjids) => {
       this.masjids = masjids;
-      this.filteredMasjids = this.sortMasjids(this.masjids);
+      this.assignSubscriptions();
+      this.masjids = this.sortMasjids(this.masjids);
+      this.filteredMasjids = this.masjids;
       // console.log(this.masjids);
     });
   }
@@ -28,7 +28,7 @@ export class MasjidsComponent implements OnInit {
   updateMasjids(): void {
     this.filteredMasjids = [];
     // console.log(this.search);
-    this.masjids.forEach(function(masjid: Masjid): void {
+    this.masjids.forEach(function(masjid): void {
       if (masjid.name.toLowerCase().includes(this.search.toLowerCase()) ||
         masjid.address.toLowerCase().includes(this.search.toLowerCase())) {
         this.filteredMasjids.push(masjid);
@@ -38,28 +38,20 @@ export class MasjidsComponent implements OnInit {
   }
 
   sortMasjids(arrMasjids: Masjid[]): Masjid[] {
-    this.sortedMasjids = [];
-    const cookies: { [p: string]: string } = this.cookieService.getAll();
-    const subscriptions: number[] = [];
-    const tempMasjids = Object.assign([], arrMasjids);
+    // @ts-ignore
+    arrMasjids.sort((a, b) => a.subscribed - b.subscribed);
+    arrMasjids.reverse();
+    return arrMasjids;
+  }
 
-    for (const [key, value] of Object.entries(cookies)) {
-      if (key.includes('masjid-subscription')) {
-        subscriptions.push(Number(value));
+  private assignSubscriptions(): void {
+    this.masjids.forEach((masjid) => {
+      if (this.cookieService.check('masjid-subscription-' + masjid.id)) {
+        masjid.subscribed = true;
       }
-    }
-
-    subscriptions.forEach((id: number) => {
-      for (let i = tempMasjids.length - 1; i >= 0; i--) {
-        if (tempMasjids[i].id === id) {
-          this.sortedMasjids.push(tempMasjids[i]);
-          tempMasjids.splice(i, 1);
-        }
+      else {
+        masjid.subscribed = false;
       }
     }, this);
-
-    // console.log(this.sortedMasjids);
-    this.sortedMasjids = this.sortedMasjids.concat(tempMasjids);
-    return this.sortedMasjids;
   }
 }

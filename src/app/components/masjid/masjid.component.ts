@@ -23,7 +23,7 @@ export class MasjidComponent implements OnInit {
 
   subscribe(): void {
     this.masjid.subscribed = !this.masjid.subscribed;
-    this.cookieService.set('masjid-subscription-' + this.masjid.id, String(this.masjid.id));
+    this.cookieService.set('masjid-subscription-' + this.masjid.id, String(this.masjid.id) + ' ' + this.masjid.name, 36500);
   }
 
   unsubscribe(): void {
