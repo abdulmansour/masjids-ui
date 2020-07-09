@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-// import { MASJIDS} from '../models/mock-masjids';
 import {Masjid} from '../models/Masjid';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class MasjidService {
 
   getMasjids(): Observable<Masjid[]> {
     this.masjidsUrl = this.getMasjidsByCurrentDateUrlBuilder(this.getCurrentDate());
-    return this.http.get<Masjid[]>(this.masjidsUrl);
+    return this.http.get<Masjid[]>(this.masjidsUrl).pipe(catchError(this.errorHandler));
   }
 
   getMasjidsByCurrentDateUrlBuilder(date: string): string {
@@ -32,5 +33,10 @@ export class MasjidService {
 
     // console.log(currentDate);
     return currentDate;
+  }
+
+  // tslint:disable-next-line:typedef
+  errorHandler(error: HttpErrorResponse) {
+    return throwError(error.message || 'Server Error!');
   }
 }

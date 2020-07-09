@@ -12,6 +12,7 @@ export class MasjidsComponent implements OnInit {
   masjids: Masjid[] = [];
   filteredMasjids: Masjid[] = [];
   search: string;
+  errorMessage: string;
 
   constructor(private masjidService: MasjidService, private cookieService: CookieService) { }
 
@@ -22,7 +23,9 @@ export class MasjidsComponent implements OnInit {
       this.masjids = this.sortMasjids(this.masjids);
       this.filteredMasjids = this.masjids;
       // console.log(this.masjids);
-    });
+    },
+      (error) => this.errorMessage = error
+    );
   }
 
   updateMasjids(): void {

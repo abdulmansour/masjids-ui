@@ -12,7 +12,6 @@ import { SearchMasjidComponent } from './components/search-masjid/search-masjid.
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {CookieService} from 'ngx-cookie-service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

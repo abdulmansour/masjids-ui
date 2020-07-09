@@ -1,2 +1,3 @@
 <input type="text" placeholder="Search Masjid" [(ngModel)]="search" (keyup)="updateMasjids()"/>
 <app-masjid *ngFor="let masjid of filteredMasjids" [masjid]="masjid"></app-masjid>
+<h2>{{ errorMessage }}</h2>
