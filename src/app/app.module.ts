@@ -13,6 +13,7 @@ import {CookieService} from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { CreateMasjidComponent } from './components/create-masjid/create-masjid.component';
 import {MasjidComponent} from './components/masjid/masjid.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {MasjidComponent} from './components/masjid/masjid.component';
     SearchMasjidComponent,
     NavbarComponent,
     CreateMasjidComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
