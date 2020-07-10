@@ -1,5 +1,5 @@
 <div class="masjid-header">
-  <h2 class="masjid-name">{{ masjid.name }}</h2>
+  <h2 class="masjid-name" (click)="onSelect(masjid)">{{ masjid.name }}</h2>
   <h5 class="masjid-address">{{ masjid.address }}</h5>
   <div *ngIf="masjid.subscribed; else elseBlock">
     <button (click)="unsubscribe()">Unsubscribe</button>

@@ -11,16 +11,18 @@ import {catchError} from 'rxjs/operators';
 export class MasjidService {
 
   masjidsUrl = 'http://localhost:8000/api/masjids/date/{date}';
+  masjidUrl = 'http://localhost:8000/api/masjids/{masjidId}/date/{date}';
 
   constructor(private http: HttpClient) { }
 
   getMasjids(): Observable<Masjid[]> {
-    this.masjidsUrl = this.getMasjidsByCurrentDateUrlBuilder(this.getCurrentDate());
+    this.masjidsUrl = this.masjidsUrl.split('{date}').join(this.getCurrentDate());
     return this.http.get<Masjid[]>(this.masjidsUrl).pipe(catchError(this.errorHandler));
   }
 
-  getMasjidsByCurrentDateUrlBuilder(date: string): string {
-    return 'http://localhost:8000/api/masjids/date/' + date;
+  getMasjid(id: number): Observable<Masjid> {
+    this.masjidUrl = this.masjidUrl.split('{date}').join(this.getCurrentDate()).split('{masjidId}').join(id.toString());
+    return this.http.get<Masjid>(this.masjidUrl).pipe(catchError(this.errorHandler));
   }
 
   public getCurrentDate(): string {

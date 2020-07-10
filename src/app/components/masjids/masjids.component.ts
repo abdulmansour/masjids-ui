@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Masjid } from '../../models/Masjid';
 import { MasjidService } from '../../services/masjid.service';
 import {CookieService} from 'ngx-cookie-service';
+import {SessionService} from '../../session.service';
 
 @Component({
   selector: 'app-masjids',
@@ -14,17 +15,20 @@ export class MasjidsComponent implements OnInit {
   search: string;
   errorMessage: string;
 
-  constructor(private masjidService: MasjidService, private cookieService: CookieService) { }
+  constructor(private masjidService: MasjidService, private cookieService: CookieService, private sessionService: SessionService) { }
 
   ngOnInit(): void {
     this.masjidService.getMasjids().subscribe((masjids) => {
       this.masjids = masjids;
+      this.sessionService.setMasjids(masjids);
       this.assignSubscriptions();
       this.masjids = this.sortMasjids(this.masjids);
       this.filteredMasjids = this.masjids;
       // console.log(this.masjids);
     },
-      (error) => this.errorMessage = error
+      (error) => {
+        this.errorMessage = error;
+      }
     );
   }
 

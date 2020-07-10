@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Masjid} from '../../models/Masjid';
 import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-masjid',
@@ -10,7 +11,7 @@ import {CookieService} from 'ngx-cookie-service';
 export class MasjidComponent implements OnInit {
   @Input() masjid: Masjid;
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private router: Router) { }
 
   ngOnInit(): void {
     if (this.cookieService.check('masjid-subscription-' + this.masjid.id)) {
@@ -29,6 +30,10 @@ export class MasjidComponent implements OnInit {
   unsubscribe(): void {
     this.masjid.subscribed = !this.masjid.subscribed;
     this.cookieService.delete('masjid-subscription-' + this.masjid.id);
+  }
+
+  onSelect(masjid: Masjid): void {
+    this.router.navigate(['/masjids', masjid.id]);
   }
 
 }
