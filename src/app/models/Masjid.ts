@@ -5,7 +5,6 @@ export class Masjid {
   name: string;
   address: string;
   zoneId: string;
-  utcOffset: string;
   timings: Timing[];
 
   subscribed: boolean;

@@ -15,6 +15,7 @@ import { CreateMasjidComponent } from './components/create-masjid/create-masjid.
 import {MasjidComponent} from './components/masjid/masjid.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MasjidDetailsComponent } from './components/masjid-details/masjid-details.component';
+import { AthanComponent } from './components/athan/athan.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MasjidDetailsComponent } from './components/masjid-details/masjid-detai
     CreateMasjidComponent,
     PageNotFoundComponent,
     MasjidDetailsComponent,
+    AthanComponent,
   ],
   imports: [
     BrowserModule,

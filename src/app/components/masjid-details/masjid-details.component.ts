@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MasjidService } from '../../services/masjid.service';
+import { MasjidService } from '../../services/masjid-service/masjid.service';
 import { Masjid } from '../../models/Masjid';
-import {SessionService} from '../../session.service';
+import {SessionService} from '../../services/session-service/session.service';
 
 @Component({
   selector: 'app-masjid-details',
@@ -11,7 +11,7 @@ import {SessionService} from '../../session.service';
 })
 export class MasjidDetailsComponent implements OnInit {
 
-  masjid: Masjid;
+  masjid: Masjid = null;
   errorMessage: string;
 
   constructor(private route: ActivatedRoute, private masjidService: MasjidService, private sessionService: SessionService) { }

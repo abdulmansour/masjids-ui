@@ -35,6 +35,11 @@
 .masjid-name {
   margin: 0px;
   cursor: pointer;
+  transition: color .5s;
+}
+
+.masjid-name:hover {
+  color: #4169E1;
 }
 
 .masjid-address {
@@ -49,6 +54,15 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.timing-day {
+  background: lightblue;
+}
+
+.timing-dark {
+  background: deepskyblue;
+}
+
 
 .timing-prayer {
   text-transform: capitalize;

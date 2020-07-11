@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Timing} from '../../models/Timing';
 import * as moment from 'moment';
 import 'moment-timezone';
-import {MasjidService} from '../../services/masjid.service';
+import {MasjidService} from '../../services/masjid-service/masjid.service';
 
 @Component({
   selector: 'app-timing',
@@ -22,7 +22,13 @@ export class TimingComponent implements OnInit {
 
   ngOnInit(): void {
     this.setIsTimingDark();
-    this.formatTime();
+    if (this.timing.isAthan) {
+      this.formatAthanTime();
+    }
+    else {
+      this.formatTime();
+
+    }
   }
 
   setIsTimingDark(): void {
@@ -43,8 +49,12 @@ export class TimingComponent implements OnInit {
     const m = moment(date);
     // console.log(m);
 
-    this.formattedTime = m.tz(this.zoneId).format('hh:mm:A z');
+    this.formattedTime = m.tz(this.zoneId).format('hh:mm A z');
     // console.log(this.formattedTime);
+  }
+
+  formatAthanTime(): void {
+    this.formattedTime = this.timing.time;
   }
 
 }

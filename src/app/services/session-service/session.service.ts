@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Masjid} from './models/Masjid';
+import {Masjid} from '../../models/Masjid';
 
 @Injectable({
   providedIn: 'root'

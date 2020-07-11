@@ -1,4 +1,4 @@
 <div class="timing" [ngClass]="timingClasses">
   <span class="timing-prayer">{{ timing.prayer | lowercase }} </span><span class="timing-time">{{ formattedTime }}</span>
-  <div class="timing-range">Start: {{ timing.start }} End: {{ timing.end }}</div>
+  <div *ngIf="!timing.isAthan" class="timing-range">Start: {{ timing.start }} End: {{ timing.end }}</div>
 </div>

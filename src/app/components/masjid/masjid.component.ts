@@ -14,11 +14,12 @@ export class MasjidComponent implements OnInit {
   constructor(private cookieService: CookieService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.cookieService.check('masjid-subscription-' + this.masjid.id)) {
-      this.masjid.subscribed = true;
-    }
-    else {
-      this.masjid.subscribed = false;
+    if (this.masjid !== null) {
+      if (this.cookieService.check('masjid-subscription-' + this.masjid.id)) {
+        this.masjid.subscribed = true;
+      } else {
+        this.masjid.subscribed = false;
+      }
     }
   }
 

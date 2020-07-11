@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { Masjid } from '../../models/Masjid';
-import { MasjidService } from '../../services/masjid.service';
+import { MasjidService } from '../../services/masjid-service/masjid.service';
 import {CookieService} from 'ngx-cookie-service';
-import {SessionService} from '../../session.service';
+import {SessionService} from '../../services/session-service/session.service';
 
 @Component({
   selector: 'app-masjids',
