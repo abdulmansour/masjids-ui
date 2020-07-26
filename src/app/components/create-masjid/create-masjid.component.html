@@ -1,1 +1,79 @@
-<p>create-masjid works!</p>
+<div class="container-fluid">
+  <h1>Create masjid</h1>
+  <form #masjidForm="ngForm">
+
+    {{ masjid | json }}
+
+    <div class="form-group">
+      <label>Masjid Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="masjid.name" #name="ngModel">
+    </div>
+
+    {{ name.valid }}
+
+    <div class="form-group">
+      <label>Address Line</label>
+      <input type="text" class="form-control" name="addressLine" [(ngModel)]="masjid.addressLine">
+    </div>
+    <div class="form-group">
+      <label>State/Province</label>
+      <input type="text" class="form-control" name="state" [(ngModel)]="masjid.state">
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <input type="text" class="form-control" name="city" [(ngModel)]="masjid.city">
+    </div>
+    <div class="form-group">
+      <label>Zip/Postal Code</label>
+      <input type="text" class="form-control" name="zip" [(ngModel)]="masjid.zip">
+    </div>
+    <div class="form-group">
+      <label>Country</label>
+      <select class="custom-select" name="country" [(ngModel)]="masjid.country">
+        <option selected>Country</option>
+        <option *ngFor="let country of countries">{{ country }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="masjid.phoneNumber">
+    </div>
+
+    <div class="form-group">
+      <label>Latitude</label>
+      <input type="text" class="form-control" name="latitude" [(ngModel)]="masjid.latitude">
+    </div>
+
+    <div class="form-group">
+      <label>Longitude</label>
+      <input type="text" class="form-control" name="longitude" [(ngModel)]="masjid.longitude">
+    </div>
+
+    <div class="form-group">
+      <label>Timezone</label>
+      <select class="custom-select" name="timezone" [(ngModel)]="masjid.zoneId">
+        <option selected>Timezone</option>
+        <option *ngFor="let timezone of timezones">{{ timezone }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Website</label>
+      <input type="text" class="form-control" name="website" [(ngModel)]="masjid.website">
+    </div>
+
+    <div class="form-group">
+      <label>Facebook</label>
+      <input type="text" class="form-control" name="facebook" [(ngModel)]="masjid.facebook">
+    </div>
+
+    <div class="form-group">
+      <label>Instagram</label>
+      <input type="text" class="form-control" name="instagram" [(ngModel)]="masjid.instagram">
+    </div>
+
+    <button class="btn btn-primary" type="submit">Create</button>
+
+  </form>
+</div>

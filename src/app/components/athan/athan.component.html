@@ -1,2 +1,4 @@
 <h2>{{ date }} {{ zoneId }}</h2>
-<app-timings [timings]="timings" [zoneId]="zoneId"></app-timings>
+<div class="center-component" *ngFor="let athanTiming of athanTimings">
+  <a class="timing-prayer">{{ athanTiming.prayer | lowercase }}</a><a class="timing-time">{{ athanTiming.time }}</a>
+</div>

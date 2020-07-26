@@ -3,6 +3,7 @@ import {AthanService} from '../../services/athan-service/athan.service';
 import {Athan} from '../../models/Athan';
 import {Timing} from '../../models/Timing';
 import {Prayer} from '../../models/Prayer';
+import {AthanTiming} from '../../models/AthanTiming';
 
 @Component({
   selector: 'app-athan',
@@ -12,7 +13,7 @@ import {Prayer} from '../../models/Prayer';
 export class AthanComponent implements OnInit {
 
   athan: Athan;
-  timings: Timing[] = [];
+  athanTimings: AthanTiming[] = [];
   zoneId: string;
   date: string;
 
@@ -46,11 +47,11 @@ export class AthanComponent implements OnInit {
         this.athan = athan;
         console.log(this.athan);
 
-        this.timings.push(new Timing(Prayer.Fajr, this.athan.data.timings.Fajr, true),
-          new Timing(Prayer.Dhuhr, this.athan.data.timings.Dhuhr, true),
-          new Timing(Prayer.Asr, this.athan.data.timings.Asr, true),
-          new Timing(Prayer.Maghrib, this.athan.data.timings.Maghrib, true),
-          new Timing(Prayer.Isha, this.athan.data.timings.Isha, true),
+        this.athanTimings.push(new AthanTiming(Prayer.Fajr, this.athan.data.timings.Fajr),
+          new AthanTiming(Prayer.Dhuhr, this.athan.data.timings.Dhuhr),
+          new AthanTiming(Prayer.Asr, this.athan.data.timings.Asr),
+          new AthanTiming(Prayer.Maghrib, this.athan.data.timings.Maghrib),
+          new AthanTiming(Prayer.Isha, this.athan.data.timings.Isha),
           );
 
         this.zoneId = this.athan.data.meta.timezone;

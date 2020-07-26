@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class MasjidComponent implements OnInit {
   @Input() masjid: Masjid;
+  mapsSearch: string;
 
   constructor(private cookieService: CookieService, private router: Router) { }
 
@@ -21,6 +22,8 @@ export class MasjidComponent implements OnInit {
         this.masjid.subscribed = false;
       }
     }
+
+    this.mapsSearch = 'https://www.google.com/maps/search/' + this.masjid.address;
   }
 
   subscribe(): void {

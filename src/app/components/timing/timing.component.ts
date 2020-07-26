@@ -22,13 +22,7 @@ export class TimingComponent implements OnInit {
 
   ngOnInit(): void {
     this.setIsTimingDark();
-    if (this.timing.isAthan) {
-      this.formatAthanTime();
-    }
-    else {
-      this.formatTime();
-
-    }
+    this.formatTime();
   }
 
   setIsTimingDark(): void {
@@ -51,10 +45,6 @@ export class TimingComponent implements OnInit {
 
     this.formattedTime = m.tz(this.zoneId).format('hh:mm A z');
     // console.log(this.formattedTime);
-  }
-
-  formatAthanTime(): void {
-    this.formattedTime = this.timing.time;
   }
 
 }

@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~10.0.2",
     "@angular/platform-browser-dynamic": "~10.0.2",
     "@angular/router": "~10.0.2",
-    "js-joda": "^1.11.0",
     "moment-timezone": "^0.5.31",
     "ngx-cookie-service": "^3.0.4",
     "rxjs": "~6.5.5",

@@ -20,6 +20,7 @@ export class MasjidsComponent implements OnInit {
   ngOnInit(): void {
     this.masjidService.getMasjids().subscribe((masjids) => {
       this.masjids = masjids;
+      this.initializeAddress();
       this.sessionService.setMasjids(masjids);
       this.assignSubscriptions();
       this.masjids = this.sortMasjids(this.masjids);
@@ -59,6 +60,16 @@ export class MasjidsComponent implements OnInit {
       else {
         masjid.subscribed = false;
       }
+    }, this);
+  }
+
+  private initializeAddress(): void {
+    this.masjids.forEach((masjid) => {
+      masjid.address = masjid.addressLine + ', '
+        + masjid.city + ', '
+        + masjid.state + ', '
+        + masjid.zip + ', '
+        + masjid.country;
     }, this);
   }
 }
