@@ -1,59 +1,69 @@
 <div class="container-fluid">
   <h1>Create masjid</h1>
-  <form #masjidForm="ngForm">
+  <form #masjidForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
 
     {{ masjid | json }}
 
     <div class="form-group">
       <label>Masjid Name</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="masjid.name" #name="ngModel">
+      <input type="text" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched"  class="form-control" name="name" [(ngModel)]="masjid.name">
+      <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
     </div>
-
-    {{ name.valid }}
 
     <div class="form-group">
       <label>Address Line</label>
-      <input type="text" class="form-control" name="addressLine" [(ngModel)]="masjid.addressLine">
+      <input type="text" required #addressLine="ngModel" [class.is-invalid]="addressLine.invalid && addressLine.touched" class="form-control" name="addressLine" [(ngModel)]="masjid.addressLine">
+      <small class="text-danger" [class.d-none]="addressLine.valid || addressLine.untouched">Address Line is required</small>
     </div>
     <div class="form-group">
       <label>State/Province</label>
-      <input type="text" class="form-control" name="state" [(ngModel)]="masjid.state">
+      <input type="text" required #state="ngModel" [class.is-invalid]="state.invalid && state.touched" class="form-control" name="state" [(ngModel)]="masjid.state">
+      <small class="text-danger" [class.d-none]="state.valid || state.untouched">State/Province is required</small>
     </div>
     <div class="form-group">
       <label>City</label>
-      <input type="text" class="form-control" name="city" [(ngModel)]="masjid.city">
+      <input type="text" required #city="ngModel" [class.is-invalid]="city.invalid && city.touched" class="form-control" name="city" [(ngModel)]="masjid.city">
+      <small class="text-danger" [class.d-none]="city.valid || city.untouched">City is required</small>
     </div>
     <div class="form-group">
       <label>Zip/Postal Code</label>
-      <input type="text" class="form-control" name="zip" [(ngModel)]="masjid.zip">
+      <input type="text" required #zip="ngModel" [class.is-invalid]="zip.invalid && zip.touched" class="form-control" name="zip" [(ngModel)]="masjid.zip">
+      <small class="text-danger" [class.d-none]="zip.valid || zip.untouched">Zip is required</small>
     </div>
     <div class="form-group">
       <label>Country</label>
-      <select class="custom-select" name="country" [(ngModel)]="masjid.country">
-        <option selected>Country</option>
+      <select (blur)="validateCountry(country.value)" (change)="validateCountry(country.value)" required #country="ngModel"
+              [class.is-invalid]="countryHasError && country.touched" class="custom-select" name="country" [(ngModel)]="masjid.country">
+        <option value="default">Select Country</option>
         <option *ngFor="let country of countries">{{ country }}</option>
       </select>
+      <small class="text-danger" [class.d-none]="!countryHasError || country.untouched">Country is required</small>
     </div>
 
     <div class="form-group">
       <label>Phone Number</label>
-      <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="masjid.phoneNumber">
+      <input type="text" required #phone="ngModel" pattern="^\d{10}$"
+             [class.is-invalid]="phone.invalid && phone.touched" class="form-control" name="phoneNumber" [(ngModel)]="masjid.phoneNumber">
+      <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">Phone number is required and must be 10 digits</small>
     </div>
 
     <div class="form-group">
       <label>Latitude</label>
-      <input type="text" class="form-control" name="latitude" [(ngModel)]="masjid.latitude">
+      <input type="text" required #latitude="ngModel" [class.is-invalid]="latitude.invalid && latitude.touched" class="form-control" name="latitude" [(ngModel)]="masjid.latitude">
+      <small class="text-danger" [class.d-none]="latitude.valid || latitude.untouched">Latitude is required</small>
     </div>
 
     <div class="form-group">
       <label>Longitude</label>
-      <input type="text" class="form-control" name="longitude" [(ngModel)]="masjid.longitude">
+      <input type="text" required #longitude="ngModel" [class.is-invalid]="longitude.invalid && longitude.touched" class="form-control" name="longitude" [(ngModel)]="masjid.longitude">
+      <small class="text-danger" [class.d-none]="longitude.valid || longitude.untouched">Longitude is required</small>
     </div>
 
     <div class="form-group">
       <label>Timezone</label>
-      <select class="custom-select" name="timezone" [(ngModel)]="masjid.zoneId">
-        <option selected>Timezone</option>
+      <select (blur)="validateTimezone(timezone.value)" (change)="validateTimezone(timezone.value)" required #timezone="ngModel"
+              [class.is-invalid]="timezoneHasError && timezone.touched" class="custom-select" name="timezone" [(ngModel)]="masjid.zoneId">
+        <option value="default">Timezone</option>
         <option *ngFor="let timezone of timezones">{{ timezone }}</option>
       </select>
     </div>
@@ -73,7 +83,13 @@
       <input type="text" class="form-control" name="instagram" [(ngModel)]="masjid.instagram">
     </div>
 
-    <button class="btn btn-primary" type="submit">Create</button>
+    <div class="form-group">
+      <label>Timings</label>
+      <input type="file" class="form-control" (change)="addfile($event)"
+             placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+    </div>
+
+    <button [disabled]="masjidForm.invalid || countryHasError || timezoneHasError || submitted" class="btn btn-primary" type="submit">Create</button>
 
   </form>
 </div>
